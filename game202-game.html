@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>스투스뜨-덧셈</title>
+	<link rel="stylesheet" href="./style.css">
+	<style type="text/css">
+		 @font-face {
+    font-family: 'CookieRunOTF-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	</style>
+</head>
+
+<body id="index-game-two" class="gametwo-container">
+
+
+	<div id="pagetwo" class="pageboxes">
+		<header>
+      <!-- 다른사이트으으  홈홈메인-->
+			<div class="head-left-icons">
+				<a href="https://yoondakyeong.github.io/stooses-game">
+					<img class="icon-tops" src="./game2/icon-top-left.png">
+				</a>
+			</div>
+			<div class="head-right-icons">
+				<a href="./index.html">
+          <img class="icon-tops" src="./game2/icon-top-right-one.png">
+        </a>
+        <a href="game202-start.html">
+          <img class="icon-tops" src="./game2/icon-top-right-two.png">
+        </a>
+        <a href="game203-start.html">
+          <img class="icon-tops" src="./game2/icon-top-right-three.png">
+        </a>
+			</div>
+		</header>
+
+    <a href="./game203-start.html">
+    <button id="nextstage" class="nextstage-gametwo" style="display: none;">다음판가기</button>
+  </a>
+
+	 <img src="./game2/lasttt.png" class="lasticonimg">
+		<img class="gametwo-box" src="./game2/boximg.png">
+		
+
+
+		<!--코드드드드-->
+			
+<div class="twogame-wrap" id="twogameall">
+		
+	<h2>점수:</h2></h2> <h3>0</h3>
+ 	<div class="time"></div>
+		
+	<div class="container">
+  		<div class="question">
+  			<span id="operand-1">1</span>
+  			<span id="operator">+</span>
+  			<span id="operand-2">5</span>
+  		</div>
+  		
+  		<div class="list-of-choices">
+   			<label>
+      			<div class="list-choice"><input type="radio" name="choices" class="choice" value="0"/>
+
+      				<span id="choice-0">answer 1</span>
+      			</div>
+    		</label>
+    		<label>
+      			<div class="list-choice"><input type="radio" name="choices" class="choice"/> 
+      				<span id="choice-1">answer 2</span>
+      			</div>
+   			</label>
+    		<label>
+      			<div class="list-choice"><input type="radio" name="choices" class="choice"/> 
+      				<span id="choice-2">answer 3</span>
+      			</div>
+    		</label>
+    		<label>
+      			<div class="list-choice"><input type="radio" name="choices" class="choice"/> 
+      				<span id="choice-3">answer 4</span>
+      			</div>
+    		</label>
+  		</div>
+
+  			<input type="submit" class="submit" id="submit"/>
+	</div>
+
+	<div id="message004"></div>
+	<div class="last" id="lasttext"></div>
+</div>
+
+
+
+
+
+			
+
+
+		<div>
+			<img class="gametwo-pa" src="./game2/pa.png">
+			<img class="gametwo-pa copy-two" id="chpatwo" src="./game2/pa-two.png">
+
+			<img class="gametwo-text" id="gametwot" src="./game2/img-text.png">
+			<img class="gametwo-textes" id="gametwotes" src="./game2/img-textes.png">
+		</div>
+		
+		
+	</div>
+
+	<script type="text/javascript">
+  		var score = 0
+  		var gameNumber = 0
+  		choices = [12, 5, 6, 9];
+  		var operand = [0, 0];
+  		var timeValue = 100;
+  		var startplay = true;
+  		window.onload =  function(){ init(); 
+    		
+    	document.querySelector('#submit').addEventListener('click', function () {
+      	var listChoice = document.getElementsByClassName('choice');
+      	for (var index = 0; index < listChoice.length; index++) {
+        	if (listChoice[index].checked) {
+          	if (parseInt(listChoice[index].value) === operand[0] + operand[1]) {
+            score += 20
+            displayResult('정답!');
+            timeValue = 100;
+          	} else {
+            score -= 10
+            if (score <= 0) score = 0;
+            displayResult('땡.');
+          	}
+          	console.log(score)
+          	listChoice[index].checked = false;
+        	}
+      		}
+
+      		document.getElementsByTagName("h3")[0].innerHTML = score;
+      				setTimeout(init, 1500);	
+      				
+    		});
+
+ 			 }
+
+  		function startTime() {
+    		var time = document.querySelector('.time');
+    		time.style.width = timeValue + '%';
+
+    		clearInterval(timeInterval);
+    		var timeInterval = setInterval(function () {
+     		timeValue--;
+      		time.style.width = timeValue + '%';
+      		if (timeValue <= 0) {
+        	clearInterval(timeInterval);
+        	gameOver();
+        	message004.innerHTML = "<button onclick=repeat001() class=nextb11 />재도전</button>"
+
+      	}
+      		document.querySelector('#submit').addEventListener('click', function () {
+        	clearInterval(timeInterval);
+      	});
+
+    		}, 120);
+ 		 }
+
+  		var gameOver = function () {
+    		navigator.vibrate(250);
+    		document.querySelector('.list-of-choices').style.display = 'none';
+    		document.getElementById('submit').style.display = 'none';
+    		document.querySelector('.question').style.top = '40%';
+    		document.querySelector('.question').style.color = 'red';
+    		displayResult('게임 끝');
+
+  		}
+
+  		var checkIfCorrect = function () {
+    		var listChoice = document.getElementsByClassName('choice');
+    		for (var index = 0; index < listChoice.length; index++) {
+      		if (listChoice[index].checked) {
+        	return parseInt(listChoice[index].value) === operand[0] + operand[1]
+     	}
+    	}
+  		}
+
+  		var displayResult = function (result) {
+   			document.getElementById('operand-1').textContent = '';
+    		document.getElementById('operand-2').textContent = '';
+    		document.getElementById('operator').textContent = result;
+  		}
+/*다음페이지로 넘어가기이이*/
+  		document.getElementById("nextstage").onclick =  function(){
+  			window.location = "index.html";
+  		}
+
+
+  		function init() {
+    		gameNumber++;
+    		if (gameNumber > 5) {
+       		document.getElementById('lasttext').textContent = '최종 점수는 '+score+'점';
+       		document.querySelector('.time').style.display = 'none';
+       		document.querySelector('.list-of-choices').style.display = 'none';
+       		document.getElementById('operator').style.display = 'none';
+    		document.getElementById('submit').style.display = 'none';
+     		
+
+     		if( score > 49){
+     			document.getElementById("nextstage").style.display = "block";
+          document.querySelector('.lasticonimg').style.display = 'block';
+          document.getElementById('questiones').style.display = "none";
+     		}  
+     		if( score < 49){
+     			document.getElementById("nextstage").style.display = "none";
+     			message004.innerHTML = "<button onclick=repeat001() class=nextb11 />재도전</button>"
+     		}  	
+     
+      		return
+    		}
+    		startTime();
+
+    		document.getElementById('operator').textContent = '+';
+    		operand[0] = generateRandNum(25);
+    		operand[1] = generateRandNum(25);
+    		document.getElementById('operand-1').textContent = operand[0];
+    		document.getElementById('operand-2').textContent = operand[1];
+    		displayChoices();
+
+  		}
+
+  		var displayChoices = function () {
+    	var correctIndex = generateRandNum(4);
+    		choices[0] = operand[0] + operand[1] + (generateRandNum(10) + 1);
+    		choices[1] = operand[0] + operand[1] + (generateRandNum(10) + 1);
+    		choices[2] = operand[0] + operand[1] + (generateRandNum(10) + 1);
+    		choices[3] = operand[0] + operand[1] + (generateRandNum(10) + 1);
+    		choices[correctIndex] = operand[0] + operand[1];
+
+    	var listChoice = document.getElementsByClassName('choice');
+
+    		for (var index = 0; index < listChoice.length; index++) {
+      		listChoice[index].value = choices[index];
+    		}
+
+    		for (var index = 0; index < choices.length; index++) {
+      		document.getElementById('choice-' + index).textContent = choices[index];
+    		}
+  			}
+  		var generateRandNum = function (max) {
+   			return Math.floor(Math.random() * max);
+  		}
+
+  		function repeat001() {
+    		location.reload();
+  		}
+
+
+	</script>
+
+	<script type="text/javascript">
+			gametwot.onclick=function(){
+				gametwot.style.visibility='hidden';
+				gametwotes.style.visibility='visible';
+				chpatwo.style.visibility='visible';
+			}
+			gametwotes.onclick=function(){
+				gametwot.style.visibility='visible';
+				gametwotes.style.visibility='hidden';
+				chpatwo.style.visibility='hidden';
+			}
+			buttontwost.onclick=function(){
+				twogameall.style.display="block";
+				buttontwost.style.display="none";
+			}
+
+		</script>
+</body>
+</html>

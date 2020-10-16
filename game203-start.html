@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>스투스뜨-덧셈</title>
+	<link rel="stylesheet" href="./style.css">
+	<style type="text/css">
+		 @font-face {
+    font-family: 'CookieRunOTF-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	</style>
+</head>
+
+<body id="index-game-two" class="gametwo-container">
+
+	<!--남기기기기 -->
+	<div id="pagetwo" class="pageboxes">
+		<header>
+			<div class="head-left-icons">
+				<!-- 다른사이트으으  홈홈메인-->
+				<a href="https://yoondakyeong.github.io/stooses-game">
+					<img class="icon-tops" src="./game2/icon-top-left.png">
+				</a>
+			</div>
+			<div class="head-right-icons">
+				<a href="./index.html">
+					<img class="icon-tops" src="./game2/icon-top-right-one.png">
+				</a>
+				<a href="game202-start.html">
+					<img class="icon-tops" src="./game2/icon-top-right-two.png">
+				</a>
+				<a href="game203-start.html">
+					<img class="icon-tops" src="./game2/icon-top-right-three.png">
+				</a>
+			</div>
+		</header>
+
+	
+		<img class="gametwo-box" src="./game2/boximg.png">
+		
+
+
+		<!--코드드드드-->
+    <a href="./game203-game.html" style="color: black; text-decoration: none;">
+			<div id="buttontwost">시작하기</div>
+    </a>
+
+
+
+		<div>
+			<img class="gametwo-pa" src="./game2/pa.png">
+			<img class="gametwo-pa copy-two" id="chpatwo" src="./game2/pa-two.png">
+
+			<img class="gametwo-text" id="gametwot" src="./game2/img-text.png">
+			<img class="gametwo-textes" id="gametwotes" src="./game2/img-textes.png">
+		</div>
+		
+		
+	</div>
+
+	<script type="text/javascript">
+			gametwot.onclick=function(){
+				gametwot.style.visibility='hidden';
+				gametwotes.style.visibility='visible';
+				chpatwo.style.visibility='visible';
+			}
+			gametwotes.onclick=function(){
+				gametwot.style.visibility='visible';
+				gametwotes.style.visibility='hidden';
+				chpatwo.style.visibility='hidden';
+			}
+			buttontwost.onclick=function(){
+				twogameall.style.display="block";
+				buttontwost.style.display="none";
+			}
+
+		</script>
+</body>
+</html>
